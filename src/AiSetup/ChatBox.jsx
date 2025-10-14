@@ -17,7 +17,7 @@ const ChatBox = () => {
 
   const chatEndRef = useRef(null);
   const queryClient = useQueryClient();
-  queryClient.invalidateQueries({ queryKey: ["chat"] });
+  // queryClient.invalidateQueries({ queryKey: ["chat"] });
   const { data } = useQuery({
     queryKey: ["chat"],
     queryFn: async () => await getChatHistory(),

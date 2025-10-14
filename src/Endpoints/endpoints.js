@@ -40,7 +40,7 @@ export const getChatHistory = async()=>{
 }
 
 export const deleteChatHistoryApi= async()=>{
-  return await https.patch('/chat/delete/history')
+  return await https.delete('/chat/delete/history')
 }
 
 export const setupAssitantNameApi = async(name)=>{
