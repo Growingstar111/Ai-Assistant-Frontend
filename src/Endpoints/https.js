@@ -1,7 +1,7 @@
 import axios from "axios";
 import { store } from '../redux/store'
 export const https = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: "https://ai-assistant-backend-6aaq.onrender.com",
 });
 
 https.interceptors.request.use((config) => {
