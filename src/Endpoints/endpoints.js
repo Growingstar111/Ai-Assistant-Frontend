@@ -44,9 +44,9 @@ export const deleteChatHistoryApi= async()=>{
 }
 
 export const setupAssitantNameApi = async(name)=>{
-  return await https.post('/talk/setup/assistant', name)
+  return await https.post('/assistant/setup/assistant', name)
 }
 
 export const sendQueryToAiAPi = async(message)=>{
-  return await https.post('/talk/talk/assistant', message)
+  return await https.post('/assistant/talk/assistant', message)
 }
