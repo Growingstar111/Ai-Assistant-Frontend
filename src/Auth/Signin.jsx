@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { loginUserApi } from "../Endpoints/endpoints";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/reducer";
+import Swal from "sweetalert2";
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -19,9 +20,10 @@ const Signin = () => {
       
       setLoading(false);
       if (res?.data?.user?.isVerified === false) {
-         Toast.fire({
+         Swal.fire({
         icon: "warning",
         title: "Please verify Your EMail..",
+        text:"Click on Resend Button to get the OTP"
       });
       localStorage.setItem("email", res?.data?.user?.email)
          return navigate('/verify/otp')
