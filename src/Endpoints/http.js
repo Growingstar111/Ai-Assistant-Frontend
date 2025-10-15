@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const http = axios.create({
-  baseURL: "https://ai-assistant-backend-6aaq.onrender.com/api",
+  baseURL: "http://localhost:8000/api",
 });

@@ -6,6 +6,7 @@ import { useAssistantName } from "../useHooks/useAssistantName";
 import { useNavigate } from "react-router-dom";
 
 const Assistant = () => {
+  const [loading, setLoading] = useState(false);
   const [listening, setListening] = useState(false);
   const isSpeakingRef = useRef(false);
   const RecoRef = useRef(null);
@@ -69,8 +70,15 @@ const Assistant = () => {
       const speech = event.results[event.results.length - 1][0].transcript;
 
       if (speech.toLowerCase().includes(assistantName.toLowerCase())) {
-        const data = await sendQueryToAiAPi({ message: speech });
-        handleCommand(data?.data);
+        setLoading(true);
+        try {
+          const data = await sendQueryToAiAPi({ message: speech });
+          handleCommand(data?.data);
+        } catch (error) {
+          console.error("Error fetching AI response:", error);
+        } finally {
+          setLoading(false); 
+        }
       }
     };
 
@@ -157,10 +165,22 @@ const Assistant = () => {
           <div className="w-[200px] h-[250px] bg-[#030326] border-2 border-blue rounded-[10px] overflow-hidden shadow-2xl shadow-blue-500 mb-4">
             <img src={img} alt="" className="h-full object-cover" />
           </div>
-          
         </div>
         {/* <h1 className="text-white">Ask Me Anything.... </h1> */}
-        <h1 className="text-white text-[14px]">  Listening... </h1>
+        {loading ? (
+          <>
+            <div className="flex justify-center items-center mt-5">
+              <div className="w-8 h-8 border-4 border-t-transparent border-[#00FFD6] rounded-full animate-spin"></div>
+              <p className="text-white text-sm ml-3">Thinking...</p>
+            </div>
+          </>
+        ) : (
+          <>
+            {" "}
+            <h1 className="text-white text-[14px]"> Listening... </h1>
+          </>
+        )}
+
         <div className="flex justify-center items-center">
           <button
             type="button"
