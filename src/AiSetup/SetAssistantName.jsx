@@ -5,6 +5,7 @@ import { setupAssitantNameApi } from "../Endpoints/endpoints";
 import { Toast } from "../common_Functions/common_function";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../redux/reducer";
+import Swal from "sweetalert2";
 
 const SetAssistantName = () => {
   const flow = location.state?.flow || "setName";
@@ -17,7 +18,10 @@ const SetAssistantName = () => {
       Toast.fire({ title: "Name Is Selected", icon: "success" });
       navigate("/");
       if (flow) {
-        Toast.fire({ title: "Please Login Again" });
+        Swal.fire({
+          title: "Please Login Again",
+          icon:"info"
+        });
         dispatch(logout());
       }
     },
@@ -32,8 +36,6 @@ const SetAssistantName = () => {
   });
   const handleSubmit = () => {
     mutate({ assistantName: name });
-
-    
   };
   return (
     <>
