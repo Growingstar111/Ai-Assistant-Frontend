@@ -1,7 +1,7 @@
 import axios from "axios";
 import { store } from '../redux/store'
 export const https = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: "https://ephemeral-lebkuchen-eee5f2.netlify.app/api",
 });
 
 https.interceptors.request.use((config) => {

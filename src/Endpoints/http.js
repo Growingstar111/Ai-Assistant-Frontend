@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const http = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: "https://ephemeral-lebkuchen-eee5f2.netlify.app/api",
 });
