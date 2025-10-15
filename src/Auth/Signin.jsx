@@ -16,12 +16,21 @@ const Signin = () => {
   const { mutate } = useMutation({
     mutationFn: async (val) => await loginUserApi(val),
     onSuccess: (res) => {
+      
+      setLoading(false);
+      if (res?.data?.user?.isVerified === false) {
+         Toast.fire({
+        icon: "warning",
+        title: "Please verify Your EMail..",
+      });
+      localStorage.setItem("email", res?.data?.user?.email)
+         return navigate('/verify/otp')
+      }
       Toast.fire({
         icon: "success",
         title: "Login Successfull..",
       });
 
-      setLoading(false);
       dispatch(login(res?.data));
       navigate("/");
     },
